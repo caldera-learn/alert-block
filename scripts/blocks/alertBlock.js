@@ -66,15 +66,8 @@ export const AlertBlock = {
         },
     },
 
-    /**
-     * The edit function describes the structure of the block in the context of the editor.
-     * This represents what the editor will render when the block is used.
-     * @see https://wordpress.org/gutenberg/handbook/block-edit-save/#edit
-     *
-     * @param {Object} [props] Properties passed from the editor.
-     * @return {Element}       Element to render.
-     */
-    edit( { attributes, setAttributes, classname}) {
+    //Edit callback
+    edit( { attributes, setAttributes, className, isSelected}) {
         // Helper function for setting message value during edit
         const onChangeMessage = (value) =>  {
             setAttributes({message: value});
@@ -83,29 +76,22 @@ export const AlertBlock = {
         // Return HTML to editor
         return el(
             'div',
-            {className: props.className},
+            {className: className},
             el(
                 RichText,
                 {
                     tagName: 'div',
                     className: classNames.alertMessage,
                     placeholder: __('Important notice message...', 'learn-gutenberg'),
-                    value: props.attributes.message,
+                    value: attributes.message,
                     onChange: onChangeMessage,
-                    focus: props.focus,
-                    onFocus: props.setFocus,
+                    isSelected: isSelected,
                 }
             )
         );
     },
 
-    /**
-     * The save function defines the way in which the different attributes should be combined
-     * into the final markup, which is then serialized by Gutenberg into post_content.
-     * @see https://wordpress.org/gutenberg/handbook/block-edit-save/#save
-     *
-     * @return {Element} Element to render.
-     */
+    // Edit callback
     save: function (props) {
         return el(
             'div',
