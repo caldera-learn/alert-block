@@ -32,7 +32,7 @@ export const AlertBlockBlockName = 'caldera-learn/alert-block';
 export const AlertBlock = {
 
 
-// Block settings
+    // Block settings
 
     /**
      * This is the display title for the block, which can be translated with `i18n` functions.
@@ -74,11 +74,11 @@ export const AlertBlock = {
      * @param {Object} [props] Properties passed from the editor.
      * @return {Element}       Element to render.
      */
-    edit: function (props) {
+    edit( { attributes, setAttributes, classname}) {
         // Helper function for setting message value during edit
-        function onChangeMessage(value) {
-            props.setAttributes({message: value});
-        }
+        const onChangeMessage = (value) =>  {
+            setAttributes({message: value});
+        };
 
         // Return HTML to editor
         return el(
