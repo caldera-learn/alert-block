@@ -90,15 +90,13 @@ export const AlertBlock = {
     },
 
     // Edit callback
-    save: function (props) {
-        return el(
-            'div',
-            {className: props.className},
-            el(
-                'div',
-                {className: classNames.alertMessage},
-                props.attributes.message
-            )
+    save ({className,attributes}) {
+        return (
+            <div className={className}>
+                <div className={classNames.alertMessage}>
+                    {attributes.message}
+                </div>
+            </div>
         );
     },
 
