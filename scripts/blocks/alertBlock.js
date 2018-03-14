@@ -74,20 +74,18 @@ export const AlertBlock = {
         };
 
         // Return HTML to editor
-        return el(
-            'div',
-            {className: className},
-            el(
-                RichText,
-                {
-                    tagName: 'div',
-                    className: classNames.alertMessage,
-                    placeholder: __('Important notice message...', 'learn-gutenberg'),
-                    value: attributes.message,
-                    onChange: onChangeMessage,
-                    isSelected: isSelected,
-                }
-            )
+        return (
+            <div className={className}>
+                <RichText
+                    value={attributes.message}
+                    tagName={'div'}
+                    className={classNames.alertMessage}
+                    placeholder={ __('Important notice message...', 'learn-gutenberg') }
+                    onChange={onChangeMessage}
+                    isSelected={isSelected}
+
+                />
+            </div>
         );
     },
 
