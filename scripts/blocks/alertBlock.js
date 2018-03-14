@@ -4,6 +4,7 @@
  * The block is not registered here, index.js has the responsibility of registering blocks
  */
 
+
 const __ = wp.i18n.__;//@TODO import from webpack
 
 /**
@@ -21,10 +22,10 @@ const RichText = wp.blocks.RichText; //@TODO use an import
 import classNames from '../classNames';
 
 //Import components for UI
-//@TODO
+//Import bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-import { Alert } from 'react-bootstrap';
+//Alert display
+import { AlertDisplay } from "../components/alert/display";
 
 //Export block name for consistency
 export const AlertBlockBlockName = 'caldera-learn/alert-block';
@@ -84,9 +85,9 @@ export const AlertBlock = {
                     />
                 }
                 {! isSelected &&
-                    <Alert bsStyle={'warning'} className={classNames.alertMessage}>
-                        {attributes.message}
-                    </Alert>
+                    <AlertDisplay
+                        message={attributes.message}
+                    />
                 }
 
             </div>
@@ -98,9 +99,9 @@ export const AlertBlock = {
     save ({className,attributes}) {
         return (
             <div className={className}>
-                <Alert bsStyle={'warning'} className={classNames.alertMessage}>
-                    {attributes.message}
-                </Alert>
+                <AlertDisplay
+                    message={attributes.message}
+                />
             </div>
         );
     },
