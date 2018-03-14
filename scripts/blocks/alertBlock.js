@@ -4,19 +4,8 @@
  * The block is not registered here, index.js has the responsibility of registering blocks
  */
 
-
+//Translation functions
 const __ = wp.i18n.__;//@TODO import from webpack
-
-/**
- * Returns a new element of given type. Element is an abstraction layer atop React.
- */
-const el = wp.element.createElement; //@TODO use an import
-
-/**
- * Returns a custom component for RichText text.
- */
-const RichText = wp.blocks.RichText; //@TODO use an import
-
 
 //Import class names
 import classNames from '../classNames';
@@ -26,7 +15,7 @@ import classNames from '../classNames';
 import 'bootstrap/dist/css/bootstrap.min.css';
 //Alert display
 import { AlertDisplay } from "../components/alert/display";
-
+import {AlertEditMessage} from "../components/alert/editMessage";
 //Export block name for consistency
 export const AlertBlockBlockName = 'caldera-learn/alert-block';
 
@@ -74,11 +63,8 @@ export const AlertBlock = {
         return (
             <div className={className}>
                 {isSelected &&
-                    <RichText
-                        value={attributes.message}
-                        tagName={'p'}
-                        className={classNames.alertMessage}
-                        placeholder={ __('Important notice message...', 'learn-gutenberg') }
+                    <AlertEditMessage
+                        message={attributes.message}
                         onChange={onChangeMessage}
                         isSelected={isSelected}
 
