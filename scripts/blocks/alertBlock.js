@@ -4,6 +4,7 @@
  * The block is not registered here, index.js has the responsibility of registering blocks
  */
 
+
 //Translation functions
 const __ = wp.i18n.__;//@TODO import from webpack
 
@@ -16,8 +17,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 //Alert display
 import { AlertDisplay } from "../components/alert/display";
 import {AlertEditMessage} from "../components/alert/editMessage";
+import {AlertSelectType} from "../components/alert/selectType";
+
 //Export block name for consistency
 export const AlertBlockBlockName = 'caldera-learn/alert-block';
+import {Toolbar} from "@wordpress/components";
 
 //Export block definition, decoupled from block Registration
 export const AlertBlock = {
@@ -50,6 +54,11 @@ export const AlertBlock = {
             source: 'children', // The array contains children elements of the selected element
             selector: `.${classNames.alertMessage}`, // The selected element has a class of "ex4-notice"
         },
+        alertType: {
+            source: 'attribute',
+            selector: 'p',
+            attribute: 'type',
+        }
     },
 
     //Edit callback
@@ -59,19 +68,37 @@ export const AlertBlock = {
             setAttributes({message: value});
         };
 
+        //Handle changes to the alert type
+        const onChangeType = (value) => {
+            setAttributes({alertType: value});
+        };
+
+
         // Return HTML to editor
+
         return (
             <div className={className}>
                 {isSelected &&
-                    <AlertEditMessage
-                        message={attributes.message}
-                        onChange={onChangeMessage}
-                        isSelected={isSelected}
+                    <fragment>
+                        <Toolbar
+                        >
+                            <AlertSelectType
+                                type={attributes.alertType}
+                                onChange={onChangeType}
+                            />
+                        </Toolbar>
 
-                    />
+                        <AlertEditMessage
+                            message={attributes.message}
+                            onChange={onChangeMessage}
+                            isSelected={isSelected}
+
+                        />
+                    </fragment>
                 }
                 {! isSelected &&
                     <AlertDisplay
+                        type={attributes.alertType}
                         message={attributes.message}
                     />
                 }
@@ -86,6 +113,7 @@ export const AlertBlock = {
         return (
             <div className={className}>
                 <AlertDisplay
+                    type={attributes.alertType}
                     message={attributes.message}
                 />
             </div>

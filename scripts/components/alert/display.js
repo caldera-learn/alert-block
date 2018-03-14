@@ -4,8 +4,13 @@ import { Alert } from 'react-bootstrap';
 import classNames from '../../classNames';
 export const AlertDisplay = (props)  => {
     return (
-        <Alert bsStyle="warning" >
-            <p className={classNames.alertMessage}>{props.message}</p>
+        <Alert bsStyle={props.type ? props.type : 'warning'} >
+            <p
+                className={classNames.alertMessage}
+                type={props.type}
+            >
+                {props.message}
+            </p>
         </Alert>
     );
 };
