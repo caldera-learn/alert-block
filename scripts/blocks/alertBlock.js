@@ -3,6 +3,7 @@
  *
  * The block is not registered here, index.js has the responsibility of registering blocks
  */
+
 const __ = wp.i18n.__;//@TODO import from webpack
 
 /**
@@ -21,6 +22,7 @@ import classNames from '../classNames';
 
 //Import components for UI
 //@TODO
+import { Alert } from 'react-bootstrap';
 
 //Export block name for consistency
 export const AlertBlockBlockName = 'caldera-learn/alert-block';
@@ -29,12 +31,7 @@ export const AlertBlockBlockName = 'caldera-learn/alert-block';
 export const AlertBlock = {
 
 
-    // Block settings
-
-    /**
-     * This is the display title for the block, which can be translated with `i18n` functions.
-     * The block inserter will show this name.
-     */
+    // Title
     title: __('Alert Block', 'learn-gutenberg'),
 
     // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
@@ -75,7 +72,7 @@ export const AlertBlock = {
             <div className={className}>
                 <RichText
                     value={attributes.message}
-                    tagName={'div'}
+                    tagName={'p'}
                     className={classNames.alertMessage}
                     placeholder={ __('Important notice message...', 'learn-gutenberg') }
                     onChange={onChangeMessage}
@@ -86,13 +83,14 @@ export const AlertBlock = {
         );
     },
 
+
     // Edit callback
     save ({className,attributes}) {
         return (
             <div className={className}>
-                <div className={classNames.alertMessage}>
+                <Alert bsStyle={'warning'} className={classNames.alertMessage}>
                     {attributes.message}
-                </div>
+                </Alert>
             </div>
         );
     },
