@@ -22,6 +22,8 @@ import classNames from '../classNames';
 
 //Import components for UI
 //@TODO
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { Alert } from 'react-bootstrap';
 
 //Export block name for consistency
@@ -70,15 +72,23 @@ export const AlertBlock = {
         // Return HTML to editor
         return (
             <div className={className}>
-                <RichText
-                    value={attributes.message}
-                    tagName={'p'}
-                    className={classNames.alertMessage}
-                    placeholder={ __('Important notice message...', 'learn-gutenberg') }
-                    onChange={onChangeMessage}
-                    isSelected={isSelected}
+                {isSelected &&
+                    <RichText
+                        value={attributes.message}
+                        tagName={'p'}
+                        className={classNames.alertMessage}
+                        placeholder={ __('Important notice message...', 'learn-gutenberg') }
+                        onChange={onChangeMessage}
+                        isSelected={isSelected}
 
-                />
+                    />
+                }
+                {! isSelected &&
+                    <Alert bsStyle={'warning'} className={classNames.alertMessage}>
+                        {attributes.message}
+                    </Alert>
+                }
+
             </div>
         );
     },
