@@ -16,9 +16,6 @@ const el = wp.element.createElement; //@TODO use an import
 const RichText = wp.blocks.RichText; //@TODO use an import
 
 
-//import CSS
-//import './editor.scss';
-
 //Import class names
 import classNames from '../classNames';
 

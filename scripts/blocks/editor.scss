@@ -1,30 +1,3 @@
-.learn-gutenberg-events-field {
-  label {
-    display: block;
-    color: #666;
-    margin-bottom: 5px;
-  }
-
-  input[type="text"]:not(.components-time-picker__input),
-  input[type="email"],
-  textarea {
-    width: 100%;
-    border: none;
-    padding: 0;
-    box-shadow: none;
-  }
-
-  input[type="number"] {
-    border: none;
-    padding: 0;
-    box-shadow: none;
-    &:focus {
-      outline: none;
-    }
-  }
-
-  .components-time-picker {
-    display: block;
-    width: auto;
-  }
+.wp-block-caldera-learn-alert-block {
+    .alertMessage{ background: red; color:white;}
 }

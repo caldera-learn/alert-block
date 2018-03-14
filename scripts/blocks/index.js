@@ -1,3 +1,6 @@
+//import CSS
+import './editor.scss';
+
 //Import block registration API form WordPress
 import { registerBlockType } from "@wordpress/blocks";
 
