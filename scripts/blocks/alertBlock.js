@@ -24,6 +24,11 @@ import {AlertDisplayWithApiData} from "../components/alert/display";
 export const AlertBlockBlockName = 'caldera-learn/alert-block';
 import {Toolbar} from "@wordpress/components";
 
+import {InspectorControls} from "@wordpress/blocks";
+import {TextControl} from "@wordpress/components";
+import {CheckboxControl} from "@wordpress/components";
+
+
 //Export block definition, decoupled from block Registration
 export const AlertBlock = {
 
@@ -60,6 +65,9 @@ export const AlertBlock = {
             source: 'attribute',
             selector: 'p',
             attribute: 'type',
+        },
+        postId: {
+            type: 'integer'
         }
     },
 
@@ -75,33 +83,41 @@ export const AlertBlock = {
             setAttributes({alertType: value});
         };
 
+        //Handle changes to the alert type
+        const onChangePostId = (value) => {
+            setAttributes({postId: value});
+        };
 
         // Return HTML to editor
-
         return (
             <div className={className}>
                 {isSelected &&
-                    <fragment>
-                        <Toolbar
-                        >
-                            <AlertSelectType
-                                type={attributes.alertType}
-                                onChange={onChangeType}
-                            />
-                        </Toolbar>
-
-                        <AlertEditMessage
-                            message={attributes.message}
-                            onChange={onChangeMessage}
-                            isSelected={isSelected}
-
+                    <InspectorControls key={'inspector'}>
+                        <AlertSelectType
+                            type={attributes.alertType}
+                            onChange={onChangeType}
                         />
-                    </fragment>
+                        <TextControl
+                            label={__( 'Remote post ID')}
+                            type={'number'}
+                            onChange={onChangePostId}
+                        />
+                    </InspectorControls>
+
+                }
+                {isSelected &&
+                    <AlertEditMessage
+                        message={attributes.message}
+                        onChange={onChangeMessage}
+                        isSelected={isSelected}
+
+                    />
                 }
                 {! isSelected &&
                     <AlertDisplayWithApiData
                         type={attributes.alertType}
                         message={attributes.message}
+                        postId={attributes.postId}
                     />
                 }
 

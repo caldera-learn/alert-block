@@ -1,6 +1,6 @@
 //Import WordPress render functions (instead of using react-dom and react.createElement directly)
-import { render, createElement } from "@wordpress/element";
-
+const { render, createElement } = wp.element;
+import {AlertDisplayWithApiData} from "../components/alert/display";
 //@TODO import more stuff
 
 //Class names for consistency
@@ -14,22 +14,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
     //Check if we found any
     if ( blocks.length) {
         //Loop through each
-        blocks.forEach( (blockDOMElement) => {
-            //Get content
-            //This could be REST API call or some other source
-            let content = blockDOMElement.innerHTML;
-            //Mount app over same DOM element
-            render(
-                //Create HTML out of
-                createElement(
-                    'div',
-                    {
-                        className: `${classNames.description}-front-outer`
-                    },
-                    '🌮'
-                ),
-                blockDOMElement
-            );
+        blocks.forEach((blockDOMElement) => {
+            //@TODO STUFF
         });
     }
 });

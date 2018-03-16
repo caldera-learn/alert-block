@@ -32,7 +32,7 @@ export class AlertDisplayWithApiData extends Component {
 
     //Get the API
     getRemoteMessage(){
-        wp.apiRequest( {
+        let promise = wp.apiRequest( {
             //@TODO Make work with posts besides 665
             url: '/wp-json/wp/v2/posts/665'
         }  )
@@ -43,7 +43,9 @@ export class AlertDisplayWithApiData extends Component {
 
     //Run get message when component mounted
     componentDidMount(){
-        this.getRemoteMessage();
+        if( this.props.postId ){
+            this.getRemoteMessage();
+        }
     }
 
     //render

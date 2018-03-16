@@ -29,4 +29,4 @@ function caldera_learn_alert_block_enqueue_block_front_assets() {
     wp_enqueue_style( $handle, plugins_url( $editor_css, __FILE__ ), array(
     ), filemtime( "$dir/$editor_css" ) );
 }
-add_action( 'wp_enqueue_scripts', 'caldera_learn_alert_block_enqueue_block_front_assets' );
+//add_action( 'wp_enqueue_scripts', 'caldera_learn_alert_block_enqueue_block_front_assets' );
