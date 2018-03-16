@@ -18,6 +18,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { AlertDisplay } from "../components/alert/display";
 import {AlertEditMessage} from "../components/alert/editMessage";
 import {AlertSelectType} from "../components/alert/selectType";
+import {AlertDisplayWithApiData} from "../components/alert/display";
 
 //Export block name for consistency
 export const AlertBlockBlockName = 'caldera-learn/alert-block';
@@ -50,9 +51,10 @@ export const AlertBlock = {
     attributes: {
         // The editable "message" value, props.attributes.message
         message: {
-            type: 'array', // This attribute's value is an array
-            source: 'children', // The array contains children elements of the selected element
-            selector: `.${classNames.alertMessage}`, // The selected element has a class of "ex4-notice"
+            type: 'array',
+            source: 'children',
+            selector: `.${classNames.alertMessage}`,
+            default: 'Hi Roy'
         },
         alertType: {
             source: 'attribute',
@@ -97,7 +99,7 @@ export const AlertBlock = {
                     </fragment>
                 }
                 {! isSelected &&
-                    <AlertDisplay
+                    <AlertDisplayWithApiData
                         type={attributes.alertType}
                         message={attributes.message}
                     />
