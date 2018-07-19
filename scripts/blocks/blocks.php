@@ -27,32 +27,35 @@ add_action( 'enqueue_block_editor_assets', 'caldera_learn_alert_block_enqueue_bl
 
 
 add_action( 'init', function(){
-    register_block_type( 'caldera-learn/alert-block', [
-        [
-            'message' => [
-                'type'=> 'array',
-                'source'=> 'children',
-                'selector'=> 'alertMessage',
-                'default' => 'Hi Roy'
+    if( function_exists( 'register_block_type' ) ){
+        register_block_type( 'caldera-learn/alert-block', [
+            [
+                'message' => [
+                    'type'=> 'array',
+                    'source'=> 'children',
+                    'selector'=> 'alertMessage',
+                    'default' => 'Hi Roy'
+                ],
+                'alertType' => [
+                    'source'=> 'attribute',
+                    'selector' => 'p',
+                    'attribute' => 'type',
+                ],
+                'postId' =>  [
+                    'type' => 'integer'
+                ]
             ],
-            'alertType' => [
-                'source'=> 'attribute',
-                'selector' => 'p',
-                'attribute' => 'type',
-            ],
-            'postId' =>  [
-                'type' => 'integer'
-            ]
-        ],
-        // Create front-end display
-        'render_callback' => function( $attr ){
-            $type = isset( $attr[ 'type' ]) ? $attr[ 'type' ]:  'warning';
-            $message = isset( $attr[ 'message' ]) ? $attr[ 'message' ]:  __( 'No message' );
-           return "<div class=\"wp-block-caldera-learn-alert-block\">
+            // Create front-end display
+            //Also this is basically what JSX does
+            'render_callback' => function( $attr ){
+                $type = isset( $attr[ 'type' ]) ? $attr[ 'type' ]:  'warning';
+                $message = isset( $attr[ 'message' ]) ? $attr[ 'message' ]:  __( 'No message' );
+            return "<div class=\"wp-block-caldera-learn-alert-block\">
                 <div role=\"alert\" class=\"alert alert-$type\">
                     <p class=\"alertMessage\">$message</p>
                 </div>
             </div>";
-        }
-    ]);
+            }
+        ]);
+    }
 });
